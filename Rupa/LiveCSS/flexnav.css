@@ -1,0 +1,310 @@
+
+
+/* Flexnav Base Styles */
+ol, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+
+ol, ul {
+  list-style: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+
+
+.flexnav {
+  *zoom: 1;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 100%;
+  max-height: 0; text-align:center;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:12px;
+/*background: #414141;*/ /*background of menu bar (default state)*/
+}
+
+.flexnav:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.flexnav.show {
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
+  max-height: 1000px;
+}
+
+
+
+.flexnav li {
+  font-size: 100%;
+  position: relative;
+}
+
+.flexnav li a {
+  position: relative;
+  display: block;
+  z-index:0;
+  overflow: hidden;
+  color: #ffffff;
+  background: #282828;
+  text-decoration:none; padding:15px; border-bottom:1px solid #d0d0d0;
+}
+
+.flexnav li a:hover{text-decoration:none;}
+
+.flexnav li ul {
+  width: 100%;
+  display: none;
+  background:#000;
+}
+
+
+.flexnav ul li ul li ul li a {
+  background: #37b5f0;
+}
+
+.flexnav .touch-button {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 40px;
+  display: inline-block;
+  background: none;
+  text-align: right; padding:0 17px 0 0;
+}
+
+.flexnav .touch-button:hover {
+  cursor: pointer;
+  
+}
+
+.flexnav .touch-button .navicon {
+  position: relative;
+  top: 1.4em;
+  font-size: 12px;
+  color: #666;
+}
+
+
+.menu-button {
+  position: relative;
+  display: block;
+  background: #1d1d1d;
+  cursor: pointer;
+}
+
+.menu-button.one-page {
+  position: fixed;
+  top: 0;
+  right: 5%;
+  padding-right: 45px;
+}
+
+.menu-button .touch-button {
+  background: transparent;
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: auto;
+  display: inline-block;
+  text-align: center;
+}
+
+.menu-button .touch-button .navicon {
+  position: relative;
+}
+
+
+.touch-button img{position:relative; top:13px;}
+
+
+
+@media (min-width: 1px) and (max-width: 1023px) {
+	
+#nav_container{width:100%; margin:0px; float:none; position:absolute; top:0px; right:0px; display:block; z-index:500;}
+	
+.flexnav {text-align:left;}
+.yellow_bar{display:none;}
+.flexnav li ul{
+	width:100% !important;
+}
+	.flexnav li ul li a {
+  display: block;
+  background:#383838;
+  color:#fff;
+  width:100% !important;
+}
+}
+	
+	
+	
+	
+	
+	
+
+
+@media all and (min-width: 1024px) {
+	
+#nav_container{width:100%; background:none; height:53px; float:left; position:relative; margin-top:2px;}
+
+.flexnav li .touch-button{width:auto; background:none;}
+.flexnav li .touch-button img{display:none;background:none;}
+.flexnav li li .touch-button img{display:none;background:none;}
+.flexnav .touch-button {
+  position: absolute;
+  z-index: 999;
+  top:-6px;
+  right: 0;
+  width: 100%;
+  height: 40px;
+  display: inline-block;
+  background: none;
+  text-align: right; padding:0 17px 0 0;
+}
+
+.flexnav .touch-button:hover {
+  cursor: pointer;
+   /*background:url(../LiveImage/ul_hover_style.png) bottom right no-repeat;*/
+}
+
+  .flexnav {
+    overflow: visible;
+  }
+
+
+  .flexnav li {
+    position: relative;
+    list-style: none;
+    display: inline-block;
+    width: auto;
+	border-right:1px solid #b3b4b3;
+  }
+	
+	.flexnav li:nth-child(8) {
+   border-right:none;
+  }
+  .flexnav li a {
+	 background:none; 
+	 padding:6px 8px 7px 8px;
+	}
+	
+  .flexnav li a:hover{text-decoration:none; background:none;
+  color:#ff5454;}
+  
+  .selected{background:none;color:#ff5454;}
+	
+  .flexnav li:hover > ul {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+    display: block;
+    top: auto;
+    position: absolute; width:150px; text-align:left;
+	border:none; z-index: 201;
+  }
+.flexnav li ul li a {
+  display: block;
+  background:url(../LiveImage/ul_hover_one.png) top left repeat;
+  color:#d6b5af;
+}
+
+.flexnav ul li ul li a {
+  background:url(../LiveImage/ul_hover_two.png) top left repeat;
+  color:#d6b5af;
+}
+
+  .flexnav.lg-screen li:hover > ul, .flexnav.sm-screen li:hover > ul {
+    display: none;
+	background:url(../LiveImage/ul_hover_style.png) top left no-repeat;
+  }
+
+  .flexnav li a {
+    border-left: none;
+    border-bottom: none;
+  }
+  
+  .flexnav li li{border-bottom:1px solid #cb4344; display:block; background:url(../LiveImage/ul_hover_one.png) top left repeat; top:-6px; color:#d6b5af; border-right:none;}
+  .flexnav li li a{padding:7px 13px;}
+  .flexnav li li a:hover{color:#fff;background:url(../LiveImage/ul_hover_one.png) top left repeat;}
+
+  .flexnav li > ul {
+    position: absolute;
+    top: auto;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 201;
+	background:url(../LiveImage/ul_hover_style.png) top center no-repeat; padding-top:18px; margin-right:14px;
+	border:none;
+  }
+
+  .flexnav li ul li ul {
+    top: 0;
+	background:none !important;
+  }
+
+  .flexnav li ul li a {
+    border-bottom: none;
+  }
+
+  .flexnav li ul.open {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+  }
+
+  .flexnav li ul.open ul.open {
+    margin-left: 100%;
+    top: 0;
+  }
+
+  .flexnav ul li:hover ul {
+    margin-left: 100%;
+    top: 0;
+  }
+
+
+  .menu-button {
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

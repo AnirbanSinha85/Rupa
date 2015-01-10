@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{34BD2090-8EC2-4259-A1C9-C40F088165E9}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rupa</RootNamespace>
+    <AssemblyName>Rupa</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=3.0.30512.20315, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\AjaxControlToolkit.dll" />
+    <Content Include="CSS\Admin.css" />
+    <Content Include="CSS\ddsmoothmenu-v.css" />
+    <Content Include="CSS\ddsmoothmenu.css" />
+    <Content Include="CSS\jquery-ui.css" />
+    <Content Include="CSS\StyleSheet.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Error.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\AddNewitem.jpg" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\border.png" />
+    <Content Include="Images\Cancel.jpg" />
+    <Content Include="Images\controls.png" />
+    <Content Include="Images\delete.jpg" />
+    <Content Include="Images\down.gif" />
+    <Content Include="Images\down_over.gif" />
+    <Content Include="Images\Edit.jpg" />
+    <Content Include="Images\home.jpg" />
+    <Content Include="Images\icon_back_login.gif" />
+    <Content Include="Images\inp_login.gif" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\loading_background.png" />
+    <Content Include="Images\login.png" />
+    <Content Include="Images\loginbox_bg.png" />
+    <Content Include="Images\login_bg.jpg" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\overlay.png" />
+    <Content Include="Images\right.gif" />
+    <Content Include="Images\right_over.gif" />
+    <Content Include="Images\search-button.png" />
+    <Content Include="Images\submit_login.gif" />
+    <Content Include="Images\top_bg.jpg" />
+    <Content Include="Images\trash.png" />
+    <Content Include="Images\update.jpg" />
+    <Content Include="Invoice\PurchaseInvoice.aspx" />
+    <Content Include="Invoice\SalesInvoice.aspx" />
+    <Content Include="js\ddsmoothmenu.js" />
+    <Content Include="js\jquery-1.4.1.min.js" />
+    <Content Include="js\jquery-scrolltofixed-min.js" />
+    <Content Include="js\jquery-scrolltofixed.js" />
+    <Content Include="js\jquery-ui.min.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\jquery1_5.min.js" />
+    <Content Include="js\quicksearch.js" />
+    <Content Include="js\ScrollableGridPlugin.js" />
+    <Content Include="LiveCSS\flexnav.css" />
+    <Content Include="LiveCSS\gb_styles.css" />
+    <Content Include="LiveCSS\jquery.css" />
+    <Content Include="LiveCSS\responsive.css" />
+    <Content Include="LiveCSS\styles.css" />
+    <Content Include="LiveImage\bullet.png" />
+    <Content Include="LiveImage\fb.jpg" />
+    <Content Include="LiveImage\gp.jpg" />
+    <Content Include="LiveImage\home.png" />
+    <Content Include="LiveImage\innerbg.jpg" />
+    <Content Include="LiveImage\inner_contentbg.png" />
+    <Content Include="LiveImage\logo.png" />
+    <Content Include="LiveImage\menu-icon.png" />
+    <Content Include="LiveImage\rupa_footerlogo.jpg" />
+    <Content Include="LiveImage\shop_online.png" />
+    <Content Include="LiveImage\tw.jpg" />
+    <Content Include="LiveImage\ul_hover_one.PNG" />
+    <Content Include="LiveImage\you.jpg" />
+    <Content Include="LiveJS\AJS.js" />
+    <Content Include="LiveJS\AJS_fx.js" />
+    <Content Include="LiveJS\analytics.js" />
+    <Content Include="LiveJS\gb_scripts.js" />
+    <Content Include="LiveJS\jquery-1.js" />
+    <Content Include="LiveJS\jquery.js" />
+    <Content Include="LiveJS\jquery_002.js" />
+    <Content Include="LiveJS\jquery_003.js" />
+    <Content Include="LogIn.aspx" />
+    <Content Include="LogInCSS\login-box.css" />
+    <Content Include="LogInImages\login-box-backg.png" />
+    <Content Include="LogInImages\login-btn.png" />
+    <Content Include="MasterEntry\Customer.aspx" />
+    <Content Include="MasterEntry\Product.aspx" />
+    <Content Include="MasterEntry\ProductCategory.aspx" />
+    <Content Include="MasterEntry\ProductSize.aspx" />
+    <Content Include="MasterEntry\ProductSubcategory.aspx" />
+    <Content Include="MasterEntry\Supplier.aspx" />
+    <Content Include="Report\PurchaseInvoicePrint.aspx" />
+    <Content Include="Report\PurchaseInvoiceSearch.aspx" />
+    <Content Include="Report\SalesInvoicePrint.aspx" />
+    <Content Include="Report\SalesInvoiceSearch.aspx" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice\PurchaseInvoice.aspx.cs">
+      <DependentUpon>PurchaseInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Invoice\PurchaseInvoice.aspx.designer.cs">
+      <DependentUpon>PurchaseInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice\SalesInvoice.aspx.cs">
+      <DependentUpon>SalesInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Invoice\SalesInvoice.aspx.designer.cs">
+      <DependentUpon>SalesInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LogIn.aspx.cs">
+      <DependentUpon>LogIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LogIn.aspx.designer.cs">
+      <DependentUpon>LogIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterEntry\Customer.aspx.cs">
+      <DependentUpon>Customer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEntry\Customer.aspx.designer.cs">
+      <DependentUpon>Customer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterEntry\Product.aspx.cs">
+      <DependentUpon>Product.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEntry\Product.aspx.designer.cs">
+      <DependentUpon>Product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterEntry\ProductCategory.aspx.cs">
+      <DependentUpon>ProductCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEntry\ProductCategory.aspx.designer.cs">
+      <DependentUpon>ProductCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterEntry\ProductSize.aspx.cs">
+      <DependentUpon>ProductSize.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEntry\ProductSize.aspx.designer.cs">
+      <DependentUpon>ProductSize.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterEntry\ProductSubcategory.aspx.cs">
+      <DependentUpon>ProductSubcategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEntry\ProductSubcategory.aspx.designer.cs">
+      <DependentUpon>ProductSubcategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterEntry\Supplier.aspx.cs">
+      <DependentUpon>Supplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEntry\Supplier.aspx.designer.cs">
+      <DependentUpon>Supplier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\MasterPage.Master.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\MasterPage.Master.designer.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\RupaLive.Master.cs">
+      <DependentUpon>RupaLive.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\RupaLive.Master.designer.cs">
+      <DependentUpon>RupaLive.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\PurchaseInvoicePrint.aspx.cs">
+      <DependentUpon>PurchaseInvoicePrint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\PurchaseInvoicePrint.aspx.designer.cs">
+      <DependentUpon>PurchaseInvoicePrint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\PurchaseInvoiceSearch.aspx.cs">
+      <DependentUpon>PurchaseInvoiceSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\PurchaseInvoiceSearch.aspx.designer.cs">
+      <DependentUpon>PurchaseInvoiceSearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\SalesInvoicePrint.aspx.cs">
+      <DependentUpon>SalesInvoicePrint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\SalesInvoicePrint.aspx.designer.cs">
+      <DependentUpon>SalesInvoicePrint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\SalesInvoiceSearch.aspx.cs">
+      <DependentUpon>SalesInvoiceSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\SalesInvoiceSearch.aspx.designer.cs">
+      <DependentUpon>SalesInvoiceSearch.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RBusinessLayer\RBusinessLayer.csproj">
+      <Project>{FF3A5432-BD8A-4D77-A580-75266884AB57}</Project>
+      <Name>RBusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RPropertyLayer\RPropertyLayer.csproj">
+      <Project>{C67CEDCA-E5FC-4B5C-82EF-EF5398959A23}</Project>
+      <Name>RPropertyLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MasterPage\MasterPage.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MasterPage\RupaLive.Master" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5943</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

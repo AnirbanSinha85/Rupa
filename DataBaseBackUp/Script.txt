@@ -1,0 +1,402 @@
+USE [master]
+GO
+/****** Object:  Database [Rupa]    Script Date: 10/26/2014 2:31:21 PM ******/
+CREATE DATABASE [Rupa]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'Rupa', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\Rupa.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'Rupa_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\Rupa_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [Rupa] SET COMPATIBILITY_LEVEL = 110
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [Rupa].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [Rupa] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [Rupa] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [Rupa] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [Rupa] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [Rupa] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [Rupa] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [Rupa] SET AUTO_CREATE_STATISTICS ON 
+GO
+ALTER DATABASE [Rupa] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [Rupa] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [Rupa] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [Rupa] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [Rupa] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [Rupa] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [Rupa] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [Rupa] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [Rupa] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [Rupa] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [Rupa] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [Rupa] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [Rupa] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [Rupa] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [Rupa] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [Rupa] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [Rupa] SET RECOVERY FULL 
+GO
+ALTER DATABASE [Rupa] SET  MULTI_USER 
+GO
+ALTER DATABASE [Rupa] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [Rupa] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [Rupa] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [Rupa] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'Rupa', N'ON'
+GO
+USE [Rupa]
+GO
+/****** Object:  StoredProcedure [dbo].[CheckLogIn]    Script Date: 10/26/2014 2:31:22 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[CheckLogIn]
+	 
+	@UserName as varchar(50) = '',
+	@Password as varchar(50) = ''
+	 
+AS
+BEGIN
+	 
+	SET NOCOUNT ON;
+	select * from UserDetail where USERNAME=@UserName and Password=@Password
+
+     
+	 
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsertUpdateProduct]    Script Date: 10/26/2014 2:31:22 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[InsertUpdateProduct]
+(
+	@ProductID as int = 0,
+	@ProductName as varchar(50) = '',
+	@CreatedBy as int = 0,
+	@DeleteFlag as bit=0,
+	@Status as varchar(50) = ''
+)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+	if(@Status = 'Display')
+	BEGIN
+		SELECT * FROM Product WHERE DeleteFlag=0;
+	END
+	else if(@Status = 'Add')
+	BEGIN
+		INSERT INTO Product(ProductName,CreatedBy) VALUES (@ProductName,@CreatedBy)
+		RETURN 11;
+	END
+	else if(@Status = 'Update')
+	BEGIN
+		UPDATE Product Set ProductName=@ProductName,CreatedDate=getdate() WHERE ProductID=@ProductID
+		RETURN 11;
+	END
+	else if(@Status = 'Delete')
+	BEGIN
+		UPDATE Product Set DeleteFlag=1 WHERE ProductID=@ProductID
+		RETURN 11;
+	END
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsertUpdateProductCategory]    Script Date: 10/26/2014 2:31:22 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[InsertUpdateProductCategory]
+(
+	@CategoryID as int = 0,
+	@CategoryName as varchar(50) = '',
+	@CreatedBy as int = 0,
+	@DeleteFlag as bit=0,
+	@Status as varchar(50) = ''
+)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+	if(@Status = 'Display')
+	BEGIN
+		SELECT * FROM ProductCategory WHERE DeleteFlag=0;
+	END
+	else if(@Status = 'Add')
+	BEGIN
+		INSERT INTO ProductCategory(CategoryName,CreatedBy) VALUES (@CategoryName,@CreatedBy)
+		RETURN 11;
+	END
+	else if(@Status = 'Update')
+	BEGIN
+		UPDATE ProductCategory Set CategoryName=@CategoryName,CreatedDate=getdate() WHERE CategoryID=@CategoryID
+		RETURN 11;
+	END
+	else if(@Status = 'Delete')
+	BEGIN
+		UPDATE ProductCategory Set DeleteFlag=1 WHERE CategoryID=@CategoryID
+		RETURN 11;
+	END
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsertUpdateProductSize]    Script Date: 10/26/2014 2:31:22 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[InsertUpdateProductSize]
+(
+	@SizeID as int = 0,
+	@SizeName as varchar(50) = '',
+	@CreatedBy as int = 0,
+	@DeleteFlag as bit=0,
+	@Status as varchar(50) = ''
+)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+	if(@Status = 'Display')
+	BEGIN
+		SELECT * FROM ProductSize WHERE DeleteFlag=0;
+	END
+	else if(@Status = 'Add')
+	BEGIN
+		INSERT INTO ProductSize(SizeName,CreatedBy) VALUES (@SizeName,@CreatedBy)
+		RETURN 11;
+	END
+	else if(@Status = 'Update')
+	BEGIN
+		UPDATE ProductSize Set SizeName=@SizeName,CreatedDate=getdate() WHERE SizeID=@SizeID
+		RETURN 11;
+	END
+	else if(@Status = 'Delete')
+	BEGIN
+		UPDATE ProductSize Set DeleteFlag=1 WHERE SizeID=@SizeID
+		RETURN 11;
+	END
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsertUpdateProductSubCategory]    Script Date: 10/26/2014 2:31:22 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[InsertUpdateProductSubCategory]
+(
+	@SubCategoryID as int = 0,
+	@SubCategoryName as varchar(50) = '',
+	@CreatedBy as int = 0,
+	@DeleteFlag as bit=0,
+	@Status as varchar(50) = ''
+)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+	if(@Status = 'Display')
+	BEGIN
+		SELECT * FROM ProductSubCategory WHERE DeleteFlag=0;
+	END
+	else if(@Status = 'Add')
+	BEGIN
+		INSERT INTO ProductSubCategory(SubCategoryName,CreatedBy) VALUES (@SubCategoryName,@CreatedBy)
+		RETURN 11;
+	END
+	else if(@Status = 'Update')
+	BEGIN
+		UPDATE ProductSubCategory Set SubCategoryName=@SubCategoryName,CreatedDate=getdate() WHERE SubCategoryID=@SubCategoryID
+		RETURN 11;
+	END
+	else if(@Status = 'Delete')
+	BEGIN
+		UPDATE ProductSubCategory Set DeleteFlag=1 WHERE SubCategoryID=@SubCategoryID
+		RETURN 11;
+	END
+END
+
+GO
+/****** Object:  Table [dbo].[Product]    Script Date: 10/26/2014 2:31:22 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Product](
+	[ProductID] [int] IDENTITY(1,1) NOT NULL,
+	[ProductName] [varchar](50) NULL,
+	[DeleteFlag] [bit] NULL,
+	[CreatedBy] [int] NULL,
+	[CreatedDate] [datetime] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ProductCategory]    Script Date: 10/26/2014 2:31:22 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ProductCategory](
+	[CategoryID] [int] IDENTITY(1,1) NOT NULL,
+	[CategoryName] [varchar](50) NULL,
+	[DeleteFlag] [bit] NULL,
+	[CreatedBy] [int] NULL,
+	[CreatedDate] [datetime] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ProductSize]    Script Date: 10/26/2014 2:31:22 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ProductSize](
+	[SizeID] [int] IDENTITY(1,1) NOT NULL,
+	[SizeName] [varchar](50) NULL,
+	[DeleteFlag] [bit] NULL,
+	[CreatedBy] [int] NULL,
+	[CreatedDate] [datetime] NULL,
+ CONSTRAINT [PK_ProductSize] PRIMARY KEY CLUSTERED 
+(
+	[SizeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ProductSubCategory]    Script Date: 10/26/2014 2:31:22 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ProductSubCategory](
+	[SubCategoryID] [int] IDENTITY(1,1) NOT NULL,
+	[SubCategoryName] [varchar](100) NOT NULL,
+	[DeleteFlag] [bit] NULL,
+	[CreatedBy] [int] NULL,
+	[CreatedDate] [datetime] NULL,
+ CONSTRAINT [PK_ProductSubCategory] PRIMARY KEY CLUSTERED 
+(
+	[SubCategoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[UserDetail]    Script Date: 10/26/2014 2:31:22 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[UserDetail](
+	[UserID] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [varchar](50) NULL,
+	[Password] [varchar](50) NULL,
+	[FirstName] [varchar](50) NULL,
+	[AcessLevel] [int] NULL,
+	[CreatedDate] [datetime] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[Product] ADD  CONSTRAINT [DF_Product_DeleteFlag]  DEFAULT ((0)) FOR [DeleteFlag]
+GO
+ALTER TABLE [dbo].[Product] ADD  CONSTRAINT [DF_Product_CreatedDate]  DEFAULT (getdate()) FOR [CreatedDate]
+GO
+ALTER TABLE [dbo].[ProductCategory] ADD  CONSTRAINT [DF_ProductCategory_DeleteFlag]  DEFAULT ((0)) FOR [DeleteFlag]
+GO
+ALTER TABLE [dbo].[ProductCategory] ADD  CONSTRAINT [DF_ProductCategory_CreatedDate]  DEFAULT (getdate()) FOR [CreatedDate]
+GO
+ALTER TABLE [dbo].[ProductSize] ADD  CONSTRAINT [DF_ProductSize_DeleteFlag]  DEFAULT ((0)) FOR [DeleteFlag]
+GO
+ALTER TABLE [dbo].[ProductSize] ADD  CONSTRAINT [DF_ProductSize_CreatedDate]  DEFAULT (getdate()) FOR [CreatedDate]
+GO
+ALTER TABLE [dbo].[ProductSubCategory] ADD  CONSTRAINT [DF_ProductSubCategory_DeleteFlag]  DEFAULT ((0)) FOR [DeleteFlag]
+GO
+ALTER TABLE [dbo].[ProductSubCategory] ADD  CONSTRAINT [DF_ProductSubCategory_CreatedDate]  DEFAULT (getdate()) FOR [CreatedDate]
+GO
+ALTER TABLE [dbo].[UserDetail] ADD  CONSTRAINT [DF_UserDetail_CreatedDate]  DEFAULT (getdate()) FOR [CreatedDate]
+GO
+USE [master]
+GO
+ALTER DATABASE [Rupa] SET  READ_WRITE 
+GO

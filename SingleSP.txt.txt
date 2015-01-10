@@ -1,0 +1,305 @@
+CREATE PROCEDURE [dbo].[Employee_Pro]
+(
+	@empid as int = 0,
+	@name as varchar(50) = '',
+	@address as varchar(50) = '',
+	@designation as varchar(50) = '',
+	@status as varchar(50) = ''
+)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+	if(@status = 'Display')
+	BEGIN
+		SELECT * FROM Employee;
+	END
+	else if(@status = 'Add')
+	BEGIN
+		INSERT INTO Employee(name,[address],designation,createtime) VALUES (@name,@address,@designation,getdate())
+	END
+	else if(@status = 'Update')
+	BEGIN
+		UPDATE Employee Set name=@name,[address]=@address,designation=@designation WHERE empid=@empid
+	END
+	else if(@status = 'Delete')
+	BEGIN
+		DELETE FROM Employee WHERE empid=@empid
+	END
+END
+
+
+<add name="employeeConnectionstring" providerName="System.Data.SqlClient" connectionString="Data Source=RITESH-PC;Initial Catalog=DemoDatabase;Integrated Security=True"/>
+
+
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="true" ShowFooter="true" 
+             PageSize="5" AutoGenerateColumns="false" 
+             OnPageIndexChanging="GridView1_PageIndexChanging"
+             OnRowCancelingEdit="GridView1_RowCancelingEdit"
+             OnRowCommand="GridView1_RowCommand" OnRowDeleting="GridView1_RowDeleting"
+             OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating"
+             HeaderStyle-BackColor="Red" HeaderStyle-ForeColor="White" BackColor="#FFCC66" OnRowDataBound="GridView1_RowDataBound" style="margin-top: 15px">
+        <AlternatingRowStyle BackColor="#FFFFCC" />
+            <Columns>
+                <asp:templatefield headertext="empid">
+                    <itemtemplate>
+                        <asp:label id="lblempid" runat="server" text='<%#Eval("empid") %>'></asp:label>
+                    </itemtemplate>
+                    <footertemplate>
+                        <asp:label id="lbladd" runat="server"></asp:label>
+                    </footertemplate>
+                </asp:templatefield>
+
+                <asp:TemplateField HeaderText="Name">
+                    <ItemTemplate>
+                        <asp:Label ID="lblname" runat="server" Text='<%#Eval("name") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtName" runat="server" Text='<%#Eval("name") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                        <asp:TextBox ID="txtAddname" runat="server"></asp:TextBox>
+                    </FooterTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="address">
+                    <ItemTemplate>
+                        <asp:Label ID="lbladdress" runat="server" Text='<%#Eval("address") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtaddress" runat="server" Text='<%#Eval("address") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                        <asp:TextBox ID="txtAddaddress" runat="server"></asp:TextBox>
+                    </FooterTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Designation">
+                    <ItemTemplate>
+                        <asp:Label ID="lbldesignation" runat="server" Text='<%#Eval("designation") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtdesignation" runat="server" Text='<%#Eval("designation") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                        <asp:TextBox ID="txtAddDesignation" runat="server"></asp:TextBox>
+                    </FooterTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="CreateTime">
+                    <ItemTemplate>
+                        <asp:Label ID="lblcreatetime" runat="server" Text='<%#Eval("createtime","{0:dd/MM/yyyy}") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Edit">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnEdit" Text="EDIT" runat="server" CommandName="Edit" />
+                       
+                        <span onclick="return confirm('Are you sure you want to delete this record')">
+                            <asp:LinkButton ID="btnDelete" Text="DELETE" runat="server" CommandName="Delete" />
+                        </span>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:LinkButton ID="btnUpdate" Text="UPDATE" runat="server" CommandName="Update" />
+                        <br />
+                        <asp:LinkButton ID="btnCancel" Text="CANCEL" runat="server" CommandName="Cancel" />
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                        <asp:Button ID="btnAddRecord" runat="server" Text="ADD" CommandName="Add" />
+                    </FooterTemplate>
+                </asp:TemplateField>
+
+            
+            </Columns>
+        </asp:GridView>
+    </div>
+    </form>
+</body>
+
+
+
+
+    public partial class SampleRunusing_storedprocedure : System.Web.UI.Page
+    {
+        string connectionstring = ConfigurationManager.ConnectionStrings["employeeConnectionstring"].ConnectionString;
+
+        SqlCommand command;
+        SqlDataAdapter da;
+        DataSet ds;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                BindGrid();
+            }
+        }
+        protected void BindGrid()
+        {
+            SqlConnection conn = new SqlConnection(connectionstring);
+            command = new SqlCommand();
+            conn.Open();
+            command.Connection = conn;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "Employee_Pro";
+            command.Parameters.Add(new SqlParameter("@status", SqlDbType.VarChar, 50));
+            command.Parameters["@status"].Value = "Display";
+            da = new SqlDataAdapter(command);
+            ds = new DataSet();
+            da.Fill(ds);
+            GridView1.DataSource = ds;
+            GridView1.DataBind();
+            conn.Close();
+        }
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            BindGrid();
+        }
+        protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridView1.EditIndex = -1;
+            BindGrid();
+        }
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("Add"))
+            {
+                TextBox txtname = (TextBox)GridView1.FooterRow.FindControl("txtAddname");
+                TextBox txtaddress = (TextBox)GridView1.FooterRow.FindControl("txtAddaddress");
+                TextBox txtdesignation = (TextBox)GridView1.FooterRow.FindControl("txtAddDesignation");
+
+                string name, address, designation;
+                name = txtname.Text;
+                address = txtaddress.Text;
+                designation = txtdesignation.Text;
+
+                AddEmployee(name, address, designation);
+                GridView1.EditIndex = -1;
+                BindGrid();
+            }
+
+           
+        }
+        protected void AddEmployee(string name, string address, string designation)
+        {
+            SqlConnection conn = new SqlConnection(connectionstring);
+            conn.Open();
+            command = new SqlCommand();
+            command.Connection = conn;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "Employee_Pro";
+
+            command.Parameters.Add(new SqlParameter("@status", SqlDbType.VarChar, 50));
+            command.Parameters.Add(new SqlParameter("@name", SqlDbType.VarChar, 50));
+            command.Parameters.Add(new SqlParameter("@address", SqlDbType.VarChar, 50));
+            command.Parameters.Add(new SqlParameter("@designation", SqlDbType.VarChar, 50));
+
+            command.Parameters["@status"].Value = "Add";
+            command.Parameters["@name"].Value = name;
+            command.Parameters["@address"].Value = address;
+            command.Parameters["@designation"].Value = designation;
+
+            da = new SqlDataAdapter(command);
+            ds = new DataSet();
+            da.Fill(ds);
+            conn.Close();
+        }
+        protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            Label empid = (Label)GridView1.Rows[e.RowIndex].FindControl("lblempid");
+            string eid = empid.Text;
+            DeleteEmployee(eid);
+            GridView1.EditIndex = -1;
+            BindGrid();
+        }
+        protected void DeleteEmployee(string empid)
+        {
+            SqlConnection conn = new SqlConnection(connectionstring);
+            conn.Open();
+            command = new SqlCommand();
+            command.Connection = conn;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "Employee_Pro";
+
+            command.Parameters.Add(new SqlParameter("@status", SqlDbType.VarChar, 50));
+            command.Parameters.Add(new SqlParameter("@empid", SqlDbType.Int));
+            command.Parameters["@status"].Value = "Delete";
+            command.Parameters["@empid"].Value = empid;
+
+            da = new SqlDataAdapter(command);
+            ds = new DataSet();
+            da.Fill(ds);
+            conn.Close();
+        }
+        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridView1.EditIndex = e.NewEditIndex;
+            BindGrid();
+        }
+        protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            Label empid = (Label)GridView1.Rows[e.RowIndex].FindControl("lblempid");
+            TextBox name = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txtName");
+            TextBox address = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txtaddress");
+            TextBox designation = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txtdesignation");
+            string eid = empid.Text;
+            string ename = name.Text;
+            string eaddress = address.Text;
+            string edesignation = designation.Text;
+
+            UpdateEmployee(eid, ename, eaddress, edesignation);
+            GridView1.EditIndex = -1;
+            BindGrid();
+        }
+        protected void UpdateEmployee(string eid, string name, string address, string designation)
+        {
+            SqlConnection conn = new SqlConnection(connectionstring);
+            conn.Open();
+            command = new SqlCommand();
+            command.Connection = conn;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "Employee_Pro";
+
+            command.Parameters.Add(new SqlParameter("@status", SqlDbType.VarChar, 50));
+            command.Parameters.Add(new SqlParameter("@empid", SqlDbType.Int));
+            command.Parameters.Add(new SqlParameter("@name", SqlDbType.VarChar, 50));
+            command.Parameters.Add(new SqlParameter("@address", SqlDbType.VarChar, 50));
+            command.Parameters.Add(new SqlParameter("@designation", SqlDbType.VarChar, 50));
+
+            command.Parameters["@status"].Value = "Update";
+            command.Parameters["@empid"].Value = Convert.ToInt32(eid.ToString());
+            command.Parameters["@name"].Value = name;
+            command.Parameters["@address"].Value = address;
+            command.Parameters["@designation"].Value = designation;
+
+            da = new SqlDataAdapter(command);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            conn.Close();
+        }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells[0].Text = "Page " + (GridView1.PageIndex + 1) + " of " + GridView1.PageCount;
+            }
+
+            //if you want to display footer at the end of gridview instead of each page index
+            if (GridView1.PageIndex == GridView1.PageCount - 1)
+            {
+                GridView1.ShowFooter = true;
+            }
+            else
+            {
+                GridView1.ShowFooter = false;
+            }
+        }
+    }
+
